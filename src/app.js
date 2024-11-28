@@ -1,14 +1,69 @@
+import Handlebars from 'handlebars';
+import * as Pages from './pages/index';
+import * as Components from './components/index'
+
+Handlebars.registerPartial('Input', Components.Input)
+Handlebars.registerPartial('Button', Components.Button)
+
+
 export default class App {
     constructor() {
         this.state = {
-            currentPage: "createQuestionnare"
+            currentPage: '/login'
         }
         this.appElement = document.getElementById("app")
     }
 
     render() {
-        if (this.state.currentPage === "createQuestionnare") {
-            this.appElement.innerHTML = "<h1>Hello createQuestionnare<h1/>"
+        if (this.state.currentPage === "/login") {
+            const template = Handlebars.compile(Pages.LoginPage)
+            const context = {
+                inputs: [
+                    {
+                        classInput: 'input',
+                        typeInput: 'text',
+                        placeholderInput: 'Логин',
+                    },
+                    {
+                        classInput: 'input',
+                        typeInput: 'password',
+                        placeholderInput: 'Пароль',
+                    },
+                ],
+                buttons: [
+                    {
+                        typeButton:'button',
+                        classButton:'buttonAuth',
+                        textButton: 'Авторизоваться',
+                    },
+                    {
+                        typeButton:'button',
+                        classButton:'buttonLink',
+                        textButton: 'Нет аккаунта?',
+                    },
+                ]
+            }
+            this.appElement.innerHTML = template(context)
         }
+        if (this.state.currentPage === "/register") {
+            const template = Handlebars.compile(Pages.RegisterPage)
+            this.appElement.innerHTML = template()
+        }
+        this.attachEventListener();
+    }
+
+    attachEventListener() {
+        if (this.state.currentPage === "/login") {
+            const redirectButton = document.querySelector('.redirectRegister');
+            // redirectButton.addEventListener('click', (e) => {
+            //     e.preventDefault()
+            //     this.changePage('/register')
+            // })
+            this.changePage()
+        }
+    }
+    changePage(page) {
+        this.state.currentPage = page;
+        this.render();
     }
 }
