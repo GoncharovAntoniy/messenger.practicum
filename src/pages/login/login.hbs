@@ -1,6 +1,18 @@
-<div class="login">
-    <form action="">
-        <input id="username" type="text">
-        <input id="password" type="password">
-    </form>
-</div>
+<form action="" class="login">
+    <div>
+
+    <h2 class="login__title">Вход</h2>
+    {{#each inputs}}
+        {{> Input 
+            classInput=classInput 
+            typeInput=typeInput 
+            placeholderInput=placeholderInput
+        }}
+    {{/each}}
+    </div>
+    <div class="login__buttons">
+        {{#each buttons}}
+            {{>Button typeButton=typeButton classButton=classButton textButton=textButton}}
+        {{/each}}
+    </div>
+</form>
