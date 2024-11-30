@@ -1,16 +1,22 @@
-<form action="" class="login">
-    <div>
+<form action="" class="form">
+    <div class="fields">
+        <h2 class="login__title">Вход</h2>
 
-    <h2 class="login__title">Вход</h2>
-    {{#each inputs}}
-        {{> Input 
-            classInput=classInput 
-            typeInput=typeInput 
-            placeholderInput=placeholderInput
-        }}
-    {{/each}}
+        <div class="inputs">
+            {{#each inputs}}
+                <div class="inputContainer">
+                    {{> Input 
+                        inputId=inputId
+                        classInput=classInput 
+                        typeInput=typeInput 
+                    }}
+                    <label class="labelInput" for="{{inputId}}">{{placeholderInput}}</label>
+                </div>
+            {{/each}}
+        </div>
     </div>
-    <div class="login__buttons">
+
+    <div class="form__buttons">
         {{#each buttons}}
             {{>Button typeButton=typeButton classButton=classButton textButton=textButton}}
         {{/each}}

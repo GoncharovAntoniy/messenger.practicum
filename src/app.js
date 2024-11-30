@@ -9,7 +9,7 @@ Handlebars.registerPartial('Button', Components.Button)
 export default class App {
     constructor() {
         this.state = {
-            currentPage: '/login'
+            currentPage: '/chat'
         }
         this.appElement = document.getElementById("app")
     }
@@ -20,11 +20,13 @@ export default class App {
             const context = {
                 inputs: [
                     {
+                        inputId: "inputText",
                         classInput: 'input',
                         typeInput: 'text',
                         placeholderInput: 'Логин',
                     },
                     {
+                        inputId: "inputPassword",
                         classInput: 'input',
                         typeInput: 'password',
                         placeholderInput: 'Пароль',
@@ -32,11 +34,13 @@ export default class App {
                 ],
                 buttons: [
                     {
+                        idButton: 'loginBtn',
                         typeButton:'button',
                         classButton:'buttonAuth',
                         textButton: 'Авторизоваться',
                     },
                     {
+                        idButton: 'linkBtn',
                         typeButton:'button',
                         classButton:'buttonLink',
                         textButton: 'Нет аккаунта?',
@@ -47,6 +51,76 @@ export default class App {
         }
         if (this.state.currentPage === "/register") {
             const template = Handlebars.compile(Pages.RegisterPage)
+            const context = {
+                inputs: [
+                    {
+                        inputId: "email",
+                        classInput: 'input',
+                        typeInput: 'text',
+                        placeholderInput: 'Почта',
+                    },
+                    {
+                        inputId: "login",
+                        classInput: 'input',
+                        typeInput: 'text',
+                        placeholderInput: 'Логин',
+                    },
+                    {
+                        inputId: "firstname",
+                        classInput: 'input',
+                        typeInput: 'text',
+                        placeholderInput: 'имя',
+                    },
+                    {
+                        inputId: "lastname",
+                        classInput: 'input',
+                        typeInput: 'text',
+                        placeholderInput: 'Фамилия',
+                    },
+                    {
+                        inputId: "telephone",
+                        classInput: 'input',
+                        typeInput: 'number',
+                        placeholderInput: 'Телефон',
+                    },
+                    {
+                        inputId: "inputPassword",
+                        classInput: 'input',
+                        typeInput: 'password',
+                        placeholderInput: 'Пароль',
+                    },
+                    {
+                        inputId: "password",
+                        classInput: 'input',
+                        typeInput: 'password',
+                        placeholderInput: 'Пароль',
+                    },
+                    {
+                        inputId: "repassword",
+                        classInput: 'input',
+                        typeInput: 'password',
+                        placeholderInput: 'Пароль (ещё раз)',
+                    },
+                ],
+                buttons: [
+                    {   
+                        idButton: 'registerBtn',
+                        typeButton:'button',
+                        classButton:'buttonAuth',
+                        textButton: 'Зарегистрироваться',
+                    },
+                    {
+                        idButton: 'loginBtn',
+                        typeButton:'button',
+                        classButton:'buttonLink',
+                        textButton: 'Войти',
+                    },
+                ]
+            }
+            this.appElement.innerHTML = template(context)
+        }
+        if (this.state.currentPage === "/chat") {
+            const template = Handlebars.compile(Pages.ChatPage)
             this.appElement.innerHTML = template()
         }
         this.attachEventListener();

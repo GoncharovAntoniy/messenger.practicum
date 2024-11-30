@@ -1,13 +1,24 @@
-<form action="">
-    <input type="text" placeholder="Почта">
-    <input type="text" placeholder="Логин">
-    <input type="text" placeholder="Имя">
-    <input type="text" placeholder="Фамилия">
-    <input type="number" placeholder="Телефон">
-    <input type="password" placeholder="Пароль">
-    <input type="password" placeholder="Пароль (ещё раз)">
-    <div>
-        <button type="button">Зарегестрироваться</button>
-        <button type="button">Войти</button>
+<form action="" class="form">
+    <div class="fields">
+        <h2 class="register__title">Регистрация</h2>
+
+        <div class="inputs">
+            {{#each inputs}}
+                <div class="inputContainer">
+                    {{> Input 
+                        inputId=inputId
+                        classInput=classInput 
+                        typeInput=typeInput 
+                    }}
+                    <label class="labelInput" for="{{inputId}}">{{placeholderInput}}</label>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+
+    <div class="form__buttons">
+        {{#each buttons}}
+            {{>Button typeButton=typeButton classButton=classButton textButton=textButton}}
+        {{/each}}
     </div>
 </form>
